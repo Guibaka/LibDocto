@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-client-connect-heading" data-cy="ClientConnectCreateUpdateHeading">Create or edit a Client Connect</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_idClientConnect">Id Client Connect</label>
+          <input
+            type="number"
+            class="form-control"
+            name="idClientConnect"
+            id="field_idClientConnect"
+            data-cy="idClientConnect"
+            formControlName="idClientConnect"
+          />
+          <div
+            *ngIf="
+              editForm.get('idClientConnect')!.invalid &&
+              (editForm.get('idClientConnect')!.dirty || editForm.get('idClientConnect')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('idClientConnect')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('idClientConnect')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_mail">Mail</label>
+          <input type="text" class="form-control" name="mail" id="field_mail" data-cy="mail" formControlName="mail" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_password">Password</label>
+          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

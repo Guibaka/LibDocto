@@ -1,0 +1,138 @@
+<div>
+  <h2 id="page-heading" data-cy="DoctorHeading">
+    <span>Doctors</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-doctor"
+        [routerLink]="['/doctor/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Doctor </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="doctors?.length === 0">
+    <span>No Doctors found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="doctors && doctors.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="idDoctor">
+            <div class="d-flex">
+              <span>Id Doctor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="firstName">
+            <div class="d-flex">
+              <span>First Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lastName">
+            <div class="d-flex">
+              <span>Last Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="mail">
+            <div class="d-flex">
+              <span>Mail</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="address">
+            <div class="d-flex">
+              <span>Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="phone">
+            <div class="d-flex">
+              <span>Phone</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="scheduleStart">
+            <div class="d-flex">
+              <span>Schedule Start</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="scheduletEnd">
+            <div class="d-flex">
+              <span>Schedulet End</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="calendar.id">
+            <div class="d-flex">
+              <span>Calendar</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctor of doctors; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/doctor', doctor.id, 'view']">{{ doctor.id }}</a>
+          </td>
+          <td>{{ doctor.idDoctor }}</td>
+          <td>{{ doctor.firstName }}</td>
+          <td>{{ doctor.lastName }}</td>
+          <td>{{ doctor.mail }}</td>
+          <td>{{ doctor.address }}</td>
+          <td>{{ doctor.phone }}</td>
+          <td>{{ doctor.scheduleStart | formatMediumDate }}</td>
+          <td>{{ doctor.scheduletEnd | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="doctor.calendar">
+              <a [routerLink]="['/calendar', doctor.calendar.id, 'view']">{{ doctor.calendar.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/doctor', doctor.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/doctor', doctor.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(doctor)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

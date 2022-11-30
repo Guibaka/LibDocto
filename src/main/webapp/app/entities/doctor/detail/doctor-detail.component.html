@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="doctor">
+      <h2 data-cy="doctorDetailsHeading"><span>Doctor</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ doctor.id }}</span>
+        </dd>
+        <dt><span>Id Doctor</span></dt>
+        <dd>
+          <span>{{ doctor.idDoctor }}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+          <span>{{ doctor.firstName }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ doctor.lastName }}</span>
+        </dd>
+        <dt><span>Mail</span></dt>
+        <dd>
+          <span>{{ doctor.mail }}</span>
+        </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+          <span>{{ doctor.address }}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+          <span>{{ doctor.phone }}</span>
+        </dd>
+        <dt><span>Schedule Start</span></dt>
+        <dd>
+          <span>{{ doctor.scheduleStart | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Schedulet End</span></dt>
+        <dd>
+          <span>{{ doctor.scheduletEnd | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Calendar</span></dt>
+        <dd>
+          <div *ngIf="doctor.calendar">
+            <a [routerLink]="['/calendar', doctor.calendar.id, 'view']">{{ doctor.calendar.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/doctor', doctor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

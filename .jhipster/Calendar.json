@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20221130192404",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "calendar",
+  "fields": [
+    {
+      "fieldName": "idCalender",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "timeStart",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "timeEnd",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Calendar",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "slot",
+      "otherEntityRelationshipName": "calendar",
+      "relationshipName": "appointment",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

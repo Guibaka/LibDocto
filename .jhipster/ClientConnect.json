@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20221130192406",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "client_connect",
+  "fields": [
+    {
+      "fieldName": "idClientConnect",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ClientConnect",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "slot",
+      "otherEntityRelationshipName": "clientConnect",
+      "relationshipName": "hasAppointment",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

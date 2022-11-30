@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20221130192403",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "slot",
+  "fields": [
+    {
+      "fieldName": "idAppointment",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "availability",
+      "fieldType": "StateSlot",
+      "fieldValues": "AVAILABLE,BOOKED"
+    },
+    {
+      "fieldName": "timeStart",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "timeEnd",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Slot",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "doctor",
+      "otherEntityRelationshipName": "hasAppointment",
+      "relationshipName": "doctor",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "clientConnect",
+      "otherEntityRelationshipName": "hasAppointment",
+      "relationshipName": "clientConnect",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "calendar",
+      "otherEntityRelationshipName": "appointment",
+      "relationshipName": "calendar",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,132 @@
+<div>
+  <h2 id="page-heading" data-cy="SlotHeading">
+    <span>Slots</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-slot"
+        [routerLink]="['/slot/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Slot </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="slots?.length === 0">
+    <span>No Slots found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="slots && slots.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span>ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="idAppointment">
+            <div class="d-flex">
+              <span>Id Appointment</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="availability">
+            <div class="d-flex">
+              <span>Availability</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="timeStart">
+            <div class="d-flex">
+              <span>Time Start</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="timeEnd">
+            <div class="d-flex">
+              <span>Time End</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="doctor.id">
+            <div class="d-flex">
+              <span>Doctor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="clientConnect.id">
+            <div class="d-flex">
+              <span>Client Connect</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="calendar.id">
+            <div class="d-flex">
+              <span>Calendar</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let slot of slots; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/slot', slot.id, 'view']">{{ slot.id }}</a>
+          </td>
+          <td>{{ slot.idAppointment }}</td>
+          <td>{{ slot.availability }}</td>
+          <td>{{ slot.timeStart | formatMediumDate }}</td>
+          <td>{{ slot.timeEnd | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="slot.doctor">
+              <a [routerLink]="['/doctor', slot.doctor.id, 'view']">{{ slot.doctor.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="slot.clientConnect">
+              <a [routerLink]="['/client-connect', slot.clientConnect.id, 'view']">{{ slot.clientConnect.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="slot.calendar">
+              <a [routerLink]="['/calendar', slot.calendar.id, 'view']">{{ slot.calendar.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/slot', slot.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/slot', slot.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(slot)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

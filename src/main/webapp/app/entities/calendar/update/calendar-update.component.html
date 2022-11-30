@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-calendar-heading" data-cy="CalendarCreateUpdateHeading">Create or edit a Calendar</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_idCalender">Id Calender</label>
+          <input
+            type="number"
+            class="form-control"
+            name="idCalender"
+            id="field_idCalender"
+            data-cy="idCalender"
+            formControlName="idCalender"
+          />
+          <div *ngIf="editForm.get('idCalender')!.invalid && (editForm.get('idCalender')!.dirty || editForm.get('idCalender')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('idCalender')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('idCalender')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_timeStart">Time Start</label>
+          <div class="input-group">
+            <input
+              id="field_timeStart"
+              data-cy="timeStart"
+              type="text"
+              class="form-control"
+              name="timeStart"
+              ngbDatepicker
+              #timeStartDp="ngbDatepicker"
+              formControlName="timeStart"
+            />
+            <button type="button" class="btn btn-secondary" (click)="timeStartDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_timeEnd">Time End</label>
+          <div class="input-group">
+            <input
+              id="field_timeEnd"
+              data-cy="timeEnd"
+              type="text"
+              class="form-control"
+              name="timeEnd"
+              ngbDatepicker
+              #timeEndDp="ngbDatepicker"
+              formControlName="timeEnd"
+            />
+            <button type="button" class="btn btn-secondary" (click)="timeEndDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

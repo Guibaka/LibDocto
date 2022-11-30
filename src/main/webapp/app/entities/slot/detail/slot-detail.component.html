@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="slot">
+      <h2 data-cy="slotDetailsHeading"><span>Slot</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ slot.id }}</span>
+        </dd>
+        <dt><span>Id Appointment</span></dt>
+        <dd>
+          <span>{{ slot.idAppointment }}</span>
+        </dd>
+        <dt><span>Availability</span></dt>
+        <dd>
+          <span>{{ slot.availability }}</span>
+        </dd>
+        <dt><span>Time Start</span></dt>
+        <dd>
+          <span>{{ slot.timeStart | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Time End</span></dt>
+        <dd>
+          <span>{{ slot.timeEnd | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Doctor</span></dt>
+        <dd>
+          <div *ngIf="slot.doctor">
+            <a [routerLink]="['/doctor', slot.doctor.id, 'view']">{{ slot.doctor.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Client Connect</span></dt>
+        <dd>
+          <div *ngIf="slot.clientConnect">
+            <a [routerLink]="['/client-connect', slot.clientConnect.id, 'view']">{{ slot.clientConnect.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Calendar</span></dt>
+        <dd>
+          <div *ngIf="slot.calendar">
+            <a [routerLink]="['/calendar', slot.calendar.id, 'view']">{{ slot.calendar.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/slot', slot.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

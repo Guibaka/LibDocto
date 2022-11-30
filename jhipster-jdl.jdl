@@ -1,0 +1,47 @@
+enum StateSlot {
+	AVAILABLE,
+    BOOKED
+}
+
+entity Slot {
+	idAppointment Integer required,
+  	availability StateSlot,
+    timeStart LocalDate, 
+    timeEnd LocalDate,
+}
+
+entity Calendar {
+	idCalender Integer required,
+    timeStart LocalDate,
+    timeEnd LocalDate
+}
+
+entity Doctor {
+	idDoctor Integer required, 
+    firstName String,
+    lastName String,
+    mail String,
+    address String, 
+    phone String,
+    scheduleStart LocalDate,
+    scheduletEnd LocalDate
+}
+
+entity ClientConnect {
+	idClientConnect Integer required, 
+    firstName String,
+    lastName String,
+    mail String,
+    password String
+}
+
+
+relationship OneToMany {
+	Doctor{hasAppointment} to Slot,
+    ClientConnect{hasAppointment} to Slot,
+    Calendar{appointment} to Slot
+}
+
+relationship OneToOne {
+	Doctor{calendar} to Calendar
+}

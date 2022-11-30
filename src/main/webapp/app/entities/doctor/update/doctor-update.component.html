@@ -1,0 +1,121 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-doctor-heading" data-cy="DoctorCreateUpdateHeading">Create or edit a Doctor</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_idDoctor">Id Doctor</label>
+          <input type="number" class="form-control" name="idDoctor" id="field_idDoctor" data-cy="idDoctor" formControlName="idDoctor" />
+          <div *ngIf="editForm.get('idDoctor')!.invalid && (editForm.get('idDoctor')!.dirty || editForm.get('idDoctor')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('idDoctor')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('idDoctor')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_mail">Mail</label>
+          <input type="text" class="form-control" name="mail" id="field_mail" data-cy="mail" formControlName="mail" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_scheduleStart">Schedule Start</label>
+          <div class="input-group">
+            <input
+              id="field_scheduleStart"
+              data-cy="scheduleStart"
+              type="text"
+              class="form-control"
+              name="scheduleStart"
+              ngbDatepicker
+              #scheduleStartDp="ngbDatepicker"
+              formControlName="scheduleStart"
+            />
+            <button type="button" class="btn btn-secondary" (click)="scheduleStartDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_scheduletEnd">Schedulet End</label>
+          <div class="input-group">
+            <input
+              id="field_scheduletEnd"
+              data-cy="scheduletEnd"
+              type="text"
+              class="form-control"
+              name="scheduletEnd"
+              ngbDatepicker
+              #scheduletEndDp="ngbDatepicker"
+              formControlName="scheduletEnd"
+            />
+            <button type="button" class="btn btn-secondary" (click)="scheduletEndDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_calendar">Calendar</label>
+          <select
+            class="form-control"
+            id="field_calendar"
+            data-cy="calendar"
+            name="calendar"
+            formControlName="calendar"
+            [compareWith]="compareCalendar"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="calendarOption" *ngFor="let calendarOption of calendarsSharedCollection">{{ calendarOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

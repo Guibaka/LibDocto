@@ -1,0 +1,62 @@
+{
+  "applications": "*",
+  "changelogDate": "20221130192405",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "doctor",
+  "fields": [
+    {
+      "fieldName": "idDoctor",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "scheduleStart",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "scheduletEnd",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Doctor",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "calendar",
+      "ownerSide": true,
+      "relationshipName": "calendar",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "slot",
+      "otherEntityRelationshipName": "doctor",
+      "relationshipName": "hasAppointment",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

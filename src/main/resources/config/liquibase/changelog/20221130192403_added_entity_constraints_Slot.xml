@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Slot.
+    -->
+    <changeSet id="20221130192403-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="doctor_id"
+                                 baseTableName="slot"
+                                 constraintName="fk_slot__doctor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="doctor"/>
+
+        <addForeignKeyConstraint baseColumnNames="client_connect_id"
+                                 baseTableName="slot"
+                                 constraintName="fk_slot__client_connect_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="client_connect"/>
+
+        <addForeignKeyConstraint baseColumnNames="calendar_id"
+                                 baseTableName="slot"
+                                 constraintName="fk_slot__calendar_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="calendar"/>
+    </changeSet>
+</databaseChangeLog>

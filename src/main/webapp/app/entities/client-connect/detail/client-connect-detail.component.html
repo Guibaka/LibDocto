@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="clientConnect">
+      <h2 data-cy="clientConnectDetailsHeading"><span>Client Connect</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ clientConnect.id }}</span>
+        </dd>
+        <dt><span>Id Client Connect</span></dt>
+        <dd>
+          <span>{{ clientConnect.idClientConnect }}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+          <span>{{ clientConnect.firstName }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ clientConnect.lastName }}</span>
+        </dd>
+        <dt><span>Mail</span></dt>
+        <dd>
+          <span>{{ clientConnect.mail }}</span>
+        </dd>
+        <dt><span>Password</span></dt>
+        <dd>
+          <span>{{ clientConnect.password }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/client-connect', clientConnect.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

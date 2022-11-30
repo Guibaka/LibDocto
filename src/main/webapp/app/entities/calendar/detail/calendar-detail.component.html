@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="calendar">
+      <h2 data-cy="calendarDetailsHeading"><span>Calendar</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ calendar.id }}</span>
+        </dd>
+        <dt><span>Id Calender</span></dt>
+        <dd>
+          <span>{{ calendar.idCalender }}</span>
+        </dd>
+        <dt><span>Time Start</span></dt>
+        <dd>
+          <span>{{ calendar.timeStart | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Time End</span></dt>
+        <dd>
+          <span>{{ calendar.timeEnd | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/calendar', calendar.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
